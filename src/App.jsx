@@ -1,12 +1,9 @@
-import SignInPage from "./pages/SignIn";
-
-
 const App = () => {
   return (
-    <div className="flex justify-center min-h-screen items-center">
-      <SignInPage />
+    <div>
+      
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App

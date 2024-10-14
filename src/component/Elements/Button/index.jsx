@@ -1,21 +1,14 @@
-import React from 'react'
+
 
 const Button = () => {
   return (
-    <div>
-      Button
-    </div>
+    <button
+                className="h-12 rounded-md text-sm bg-primary w-full text-white"
+                type="submit"
+              >
+                Login
+              </button>
   )
 }
 
-export default Buttonconst Button = (props) => {
-    const { children, variant = "bg-black" } = props;
-  
-    return (
-      <button className={`h-10 px-6 rounded-md text-sm ${variant}`} type="submit">
-        {children}
-      </button>
-    );
-  };
-  
-  export default Button;
+export default Button
