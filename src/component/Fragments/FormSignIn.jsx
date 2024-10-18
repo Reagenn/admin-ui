@@ -1,16 +1,26 @@
-import CheckBox from "../component/Elements/CheckBox"
+import CheckBox from "../Elements/CheckBox"
 import LabeledInput from "../Elements/LabeledInput"
 import Button from "../Elements/Button"
 const FormSignIn = () => {
     return (
             <form action="">
               <div className="mb-6">
-                <LabeledInput />
+                <LabeledInput 
+                  label="Email address"
+                  type="email"
+                  placeholder="hello@example.com"
+                  name="email"
+                />
               </div>
               <div className="mb-6">
-                <LabeledInput />
+                <LabeledInput 
+                  label="Password"
+                  type="password"
+                  placeholder="*************"
+                  name="password"
+                />
               </div>
-              <div className="mb-6">
+              {/* <div className="mb-6">
                 <label htmlFor="password" className="block text-sm mb-2">
                   Password
                 </label>
@@ -21,11 +31,11 @@ const FormSignIn = () => {
                   name="password"
                   id="password"
                 />
-              </div>
+              </div> */}
               <div className="mb-3">
                 <CheckBox />
               </div>
-              <Button />
+              <Button variant="bg-primary w-full text-white" type="submit"> Login </Button>
             </form>
   )
 }

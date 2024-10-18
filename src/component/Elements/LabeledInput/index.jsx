@@ -1,13 +1,15 @@
 import Input from "./Input";
 import Label from "./Label";
 
-const index = () => {
+const LabeledInput = (props) => {
+  const { label, name, type, placeholder } = props;
+
   return (
     <>
-      <Label />
-      <Input />
+      <Label htmlFor={name}>{label}</Label>
+      <Input name={name} type={type} placeholder={placeholder} />
     </>
-  )
-}
+  );
+};
 
-export default index
+export default LabeledInput;
