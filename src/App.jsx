@@ -1,12 +1,30 @@
-import SignInPage from "./pages/signin"
-import SignUpPage from "./pages/signUp"
+import SignInPage from "./pages/signin";
+import SignUpPage from "./pages/signUp";
+import ErrorRoute from "./pages/errorRoute";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const App = () => {
-  return (
-    <div>
-      <SignUpPage/>
-    </div>
-  )
-}
+  const myRouter = createBrowserRouter([
+    {
+      path: "/",
+      element: <div>Halaman Utama</div>,
+      errorElement: <ErrorRoute />,
+    },
+    {
+      path: "/login",
+      element: <SignInPage />,
+    },
+    {
+      path: "/register",
+      element: <SignUpPage />,
+    },
+  ]);
 
-export default App
+  return (
+    <>
+      <RouterProvider router={myRouter} />
+    </>
+  );
+};
+
+export default App;
