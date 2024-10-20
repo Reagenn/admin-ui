@@ -1,5 +1,5 @@
-import SignInPage from "./pages/signIn";
-import SignUpPage from "./pages/signUp";
+import SignInPage from "./pages/signmasuk";
+import SignUpPage from "./pages/signdaftar";
 import ErrorRoute from "./pages/errorRoute";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
