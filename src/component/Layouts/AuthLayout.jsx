@@ -4,7 +4,7 @@ import Logo from "../Elements/Logo";
 import { Link } from "react-router-dom";
 
 const AuthLayout = (props) => {
-  const { children } = props;
+  const { children, type } = props;
 
   return (
     <div className="flex justify-center min-h-screen items-center bg-special-mainBg">
