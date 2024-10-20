@@ -1,8 +1,9 @@
-import SignInPage from "./pages/signin";
-import SignUpPage from "./pages/signup";
+import SignInPage from "./pages/signIn";
+import SignUpPage from "./pages/signUp";
 import ErrorRoute from "./pages/errorRoute";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+// up
 const App = () => {
   const myRouter = createBrowserRouter([
     {
