@@ -2,6 +2,7 @@ import SignInPage from "./pages/signmasuk";
 import SignUpPage from "./pages/signdaftar";
 import ErrorRoute from "./pages/errorRoute";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ForgotpwPage from "./pages/forgotpw";
 
 // up
 const App = () => {
@@ -18,6 +19,10 @@ const App = () => {
     {
       path: "/register",
       element: <SignUpPage />,
+    },
+    {
+      path: "/forgotpw",
+      element: <ForgotpwPage />,
     },
   ]);
 
