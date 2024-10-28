@@ -3,13 +3,15 @@ import SignUpPage from "./pages/signdaftar";
 import ErrorRoute from "./pages/errorRoute";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ForgotpwPage from "./pages/forgotpw";
+import DashboardPage from "./pages/dashboard";
+import BalancePage from "./pages/balance";
 
 // up
 const App = () => {
   const myRouter = createBrowserRouter([
     {
       path: "/",
-      element: <div>Halaman Utama</div>,
+      element: <DashboardPage />,
       errorElement: <ErrorRoute />,
     },
     {
@@ -23,6 +25,10 @@ const App = () => {
     {
       path: "/forgotpw",
       element: <ForgotpwPage />,
+    },
+    {
+      path: "/balance",
+      element: <BalancePage />,
     },
   ]);
 
