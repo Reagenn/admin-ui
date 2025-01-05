@@ -4,6 +4,7 @@ import Logo from "../Elements/Logo";
 // import { useState } from "react";
 import { useContext } from "react";
 import { ThemeContext } from "../../context/themeContext";
+import { AuthContext } from "../../context/authContext";
 
 const Navbar = () => {
   const themes = [
@@ -16,6 +17,7 @@ const Navbar = () => {
 
   // const [theme, setTheme] = useState(themes[0]);
   const { theme, setTheme } = useContext(ThemeContext);
+  const { name } = useContext(AuthContext);
 
   const menus = [
     {
@@ -99,7 +101,7 @@ const Navbar = () => {
               <img src="images/profile.png"></img>
             </div>
             <div className="hidden sm:block">
-              <div className="text-white font-bold">Username</div>
+              <div className="text-white font-bold">{name}</div>
               <div className="text-xs">View Profile</div>
             </div>
             <div className="hidden sm:block self-center justify-self-end">

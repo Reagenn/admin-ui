@@ -32,7 +32,7 @@ const AuthLayout = (props) => {
                 className="h-6 w-6 mr-2"
                 xmlns="http://www.w3.org/2000/svg"
                 // eslint-disable-next-line react/no-unknown-property
-                xmlns:xlink="http://www.w3.org/1999/xlink"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
                 width="800px"
                 height="800px"
                 viewBox="-0.5 0 48 48"
