@@ -1,10 +1,12 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Icon } from "../Elements/Icon";
 import Logo from "../Elements/Logo";
 // import { useState } from "react";
 import { useContext } from "react";
 import { ThemeContext } from "../../context/themeContext";
 import { AuthContext } from "../../context/authContext";
+import { NotifContext } from "../../context/notifContext";
+import axios from "axios";
 
 const Navbar = () => {
   const themes = [
@@ -17,7 +19,10 @@ const Navbar = () => {
 
   // const [theme, setTheme] = useState(themes[0]);
   const { theme, setTheme } = useContext(ThemeContext);
-  const { name } = useContext(AuthContext);
+  const { setIsLoggedIn, setName, name } = useContext(AuthContext);
+  const { setMsg, setOpen, setIsLoading } = useContext(NotifContext);
+
+  const navigate = useNavigate();
 
   const menus = [
     {
@@ -64,6 +69,34 @@ const Navbar = () => {
     },
   ];
 
+  const refreshToken = localStorage.getItem("refreshToken");
+
+  const Logout = async () => {
+    setIsLoading(true);
+    try {
+      await axios.get("https://jwt-auth-eight-neon.vercel.app/logout", {
+        headers: {
+          Authorization: `Bearer ${refreshToken}`,
+        },
+      });
+
+      setOpen(true);
+      setMsg({ severity: "success", desc: "Logout Success" });
+    } catch (error) {
+      if (error.response) {
+        setOpen(true);
+        setMsg({ severity: "error", desc: error.response.data.msg });
+      }
+    }
+
+    setIsLoggedIn(false);
+    setName("");
+    setIsLoading(false);
+
+    localStorage.removeItem("refreshToken");
+    navigate("/login");
+  };
+
   return (
     <div className="bg-defaultBlack">
       <nav className="sticky top-0 text-special-bg2 sm:w-72 w-36 min-h-screen px-7 py-12 flex flex-col justify-between">
@@ -73,7 +106,7 @@ const Navbar = () => {
           </NavLink>
           {menus.map((menu) => (
             // eslint-disable-next-line react/jsx-key
-            <NavLink key={menu.id} to={menu.link} className={({ isActive }) => (isActive ? "flex bg-primary text-white font-bold px-4 py-3 rounded-md" : "flex hover:bg-special-bg3 hover:text-white px-4 py-3 rounded-md")}>
+            <NavLink key={menu.id} to={menu.link} className={({ isActive }) => (isActive ? "flex bg-primary text-white font-bold px-4 py-3 rounded-md zoom-in" : "flex hover:bg-special-bg3 hover:text-white px-4 py-3 rounded-md zoom-in")}>
               <div className="mx-auto sm:mx-0">{menu.icon}</div>
               <div className="ms-3 hidden sm:block">{menu.label}</div>
             </NavLink>
@@ -82,17 +115,15 @@ const Navbar = () => {
         <div className="md:flex md:gap-2">
           Themes
           {themes.map((t) => (
-            <div key={t.name} className={`${t.bgcolor} md:w-6 h-6 rounded-md cursor-pointer mb-2`} onClick={() => setTheme(t)}></div>
+            <div key={t.name} className={`${t.bgcolor} md:w-6 h-6 rounded-md cursor-pointer mb-2 zoom-in`} onClick={() => setTheme(t)}></div>
           ))}
         </div>
         <div>
-          <NavLink to="/login">
-            <div className="flex bg-special-bg3 px-4 py-3 rounded-md hover:text-white">
-              <div className="mx-auto sm:mx-0 text-primary">
-                <Icon.Logout />
-              </div>
-              <div className="ms-3 hidden sm:block">Logout</div>
+          <NavLink onClick={Logout} className="flex bg-special-bg3 px-4 py-3 rounded-md hover:text-white zoom-in">
+            <div className="mx-auto sm:mx-0 text-primary">
+              <Icon.Logout />
             </div>
+            <div className="ms-3 hidden sm:block">Logout</div>
           </NavLink>
 
           <div className="border-b my-10 border-b-special-bg"></div>
