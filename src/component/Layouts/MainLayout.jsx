@@ -5,13 +5,15 @@ import { ThemeContext } from "../../context/themeContext";
 import { NotifContext } from "../../context/notifContext";
 import CustomizedSnackbars from "../Elements/SnackBar";
 import SimpleBackdrop from "../Elements/Backdrop";
+import { ModeContext } from "../../context/modeContext";
 
 const MainLayout = (props) => {
   const { children } = props;
   const { theme } = useContext(ThemeContext);
   const { msg, setMsg, open, setOpen, isLoading, setIsLoading } = useContext(NotifContext);
+  const { mode } = useContext(ModeContext);
   return (
-    <div className={`flex bg-special-mainBg w-screen min-h-screen max-w-full ${theme.name}`}>
+    <div className={`flex bg-special-mainBg w-screen min-h-screen max-w-full ${theme.name} ${mode.name} ${mode ? "dark-mode" : "light-mode"}`}>
       {/* navbar start*/}
       <Navbar />
       {/* navbar end*/}

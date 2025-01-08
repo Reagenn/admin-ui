@@ -9,6 +9,10 @@
   :root {
     /* default primary color*/
     --color-primary: #299d91;
+    --bg-light: #f4f5f7;
+    --bg-dark: #000000;
+    --text-light: #f4f5f7;
+    --text-dark: #060505;
   }
 }
 
@@ -28,6 +32,15 @@
   --color-primary: #8b4513;
 }
 
+.light-mode {
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+}
+
+.dark-mode {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+}
 .zoom-in {
   @apply duration-500 hover:translate-y-1 hover:scale-110;
 }

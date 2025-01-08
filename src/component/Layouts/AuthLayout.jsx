@@ -1,24 +1,26 @@
-// import { Children } from "react";
 import Logo from "../Elements/Logo";
-// import FormSignIn from "../component/Fragments/FormSignIn";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { NotifContext } from "../../context/notifContext";
-import { ThemeContext } from "../../context/themeContext";
 import SimpleBackdrop from "../Elements/Backdrop";
 import CustomizedSnackbars from "../Elements/SnackBar";
 import * as motion from "motion/react-client";
+import { useMode } from "../../context/modeContext";
 
 const AuthLayout = (props) => {
   const { children, type } = props;
-  const { msg, setMsg, open, setOpen, isLoading, setIsLoading } = useContext(NotifContext);
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { msg, open, setOpen, isLoading, setIsLoading } = useContext(NotifContext);
+  const { mode, toggleMode } = useMode();
 
   return (
-    <div className={`flex justify-center min-h-screen items-center ${theme.name === "theme-dark" ? "bg-gray-900 text-white" : "bg-special-mainBg text-black"}`}>
+    <div className={`flex justify-center min-h-screen items-center ${mode ? "dark-mode" : "light-mode"}`}>
+      {/* Backdrop for loading */}
       {isLoading && <SimpleBackdrop isLoading={isLoading} setIsLoading={setIsLoading} />}
+
+      {/* Notification Snackbar */}
       {msg && <CustomizedSnackbars severity={msg.severity} message={msg.desc} open={open} setOpen={setOpen} />}
-      {/* container start */}
+
+      {/* Main Container */}
       <motion.div
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -28,25 +30,25 @@ const AuthLayout = (props) => {
         }}
         className="w-full max-w-sm"
       >
-        {/* logo start */}
+        {/* Logo */}
         <Logo />
-        {/* logo end */}
-        {/* form start */}
+
+        {/* Content (e.g., Forms) */}
         <div className="mt-16">{children}</div>
-        {/* form end */}
-        {/* teks start */}
+
+        {/* Divider (Optional) */}
         {type !== "forgotpw" && (
           <div className="my-9 px-7 flex justify-center text-xs items-center flex-col static">
-            <div className={`border w-full ${theme.name === "theme-dark" ? "border-gray-700" : "border-gray-05"}`}></div>
-            <div className={`px-2 absolute ${theme.name === "theme-dark" ? "bg-gray-900 text-gray-300" : "bg-special-mainBg text-gray-600"}`}>or sign in with</div>
+            <div className={`border w-full ${mode ? "border-gray-700" : "border-gray-200"}`}></div>
+            <div className={`px-2 absolute ${mode ? "bg-gray-900 text-gray-300" : "bg-white text-gray-600"}`}>or sign in with</div>
           </div>
         )}
-        {/* teks end */}
-        {/* sign in with google start */}
+
+        {/* Sign in with Google */}
         {type !== "forgotpw" && (
           <div className="mb-8">
-            <button className={`h-12 flex items-center justify-center rounded-md text-sm w-full ${theme.name === "theme-dark" ? "bg-gray-700 text-gray-300" : "bg-gray-05 text-gray-01"}`} type="button">
-              <svg className="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="800px" height="800px" viewBox="-0.5 0 48 48" version="1.1">
+            <button className={`h-12 flex items-center justify-center rounded-md text-sm w-full ${mode ? "bg-gray-700 text-gray-300" : "bg-gray-200 text-gray-600"}`} type="button">
+              <svg className="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="-0.5 0 48 48" version="1.1">
                 <g id="Icons" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                   <g id="Color-" transform="translate(-401.000000, -860.000000)">
                     <g id="Google" transform="translate(401.000000, 860.000000)">
@@ -74,13 +76,13 @@ const AuthLayout = (props) => {
             </button>
           </div>
         )}
-        {/* sign in with google end */}
-        {/* link start */}
+
+        {/* Links */}
         {type !== "forgotpw" && (
           <div className="flex justify-center">
             {type === "sign up" ? (
               <>
-                <span className="text-sm text-gray-03">Already have an account?&nbsp;</span>
+                <span className="text-sm text-gray-600">Already have an account?&nbsp;</span>
                 <Link to="/login" className="text-primary text-sm font-bold">
                   Sign In Here
                 </Link>
@@ -94,6 +96,7 @@ const AuthLayout = (props) => {
             )}
           </div>
         )}
+
         {type === "sign in" && (
           <div className="flex flex-col items-center">
             <br />
@@ -102,6 +105,7 @@ const AuthLayout = (props) => {
             </Link>
           </div>
         )}
+
         {type === "forgotpw" && (
           <div className="flex flex-col items-center">
             <br />
@@ -110,15 +114,14 @@ const AuthLayout = (props) => {
             </Link>
           </div>
         )}
-        {/* link end */}
-        {/* Theme Switch */}
-        <div className="mt-4 flex justify-center">
-          <button className="px-4 py-2 rounded-md text-sm font-bold" onClick={() => toggleTheme(theme.name === "theme-dark" ? "light" : "dark")}>
-            Switch to {theme.name === "theme-dark" ? "Light" : "Dark"} Mode
+
+        {/* Theme Switcher */}
+        <div style={{ marginTop: "20px", textAlign: "center" }}>
+          <button onClick={toggleMode} className="text-sm font-medium">
+            Switch to {mode ? "Light" : "Dark"} Mode
           </button>
         </div>
       </motion.div>
-      {/* container end */}
     </div>
   );
 };
