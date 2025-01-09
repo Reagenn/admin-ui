@@ -39,7 +39,7 @@
 
 .dark-mode {
   background-color: var(--bg-dark);
-  color: var(--text-light);
+  color: var(--text-gray);
 }
 .zoom-in {
   @apply duration-500 hover:translate-y-1 hover:scale-110;

@@ -117,8 +117,8 @@ const AuthLayout = (props) => {
 
         {/* Theme Switcher */}
         <div style={{ marginTop: "20px", textAlign: "center" }}>
-          <button onClick={toggleMode} className="text-sm font-medium">
-            Switch to {mode ? "Light" : "Dark"} Mode
+          <button onClick={toggleMode} className={`p-2 rounded-full ${mode ? "bg-gray-800 text-white" : "bg-gray-200 text-gray-800"}`}>
+            {mode ? "🌙" : "☀️"}
           </button>
         </div>
       </motion.div>

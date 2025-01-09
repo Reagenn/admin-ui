@@ -1,4 +1,4 @@
-describe("User login", () => {
+describe("E2E Testing", () => {
   it("should allow user to log in with valid credentials", () => {
     cy.visit("http://localhost:5173/");
 
